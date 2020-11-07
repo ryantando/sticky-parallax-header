@@ -28,8 +28,7 @@ const RenderContent = ({ title }) => {
         return marginBottom
       }
 
-      marginBottom =
-        constants.deviceHeight - padding * 2 - sizes.headerHeight - contentHeight[title]
+      marginBottom = constants.deviceHeight - padding * 2 - sizes.headerHeight - contentHeight[title]
 
       return marginBottom
     }

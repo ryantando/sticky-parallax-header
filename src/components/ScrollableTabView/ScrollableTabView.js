@@ -161,7 +161,7 @@ class ScrollableTabView extends React.Component {
   goToPage = (pageNumber) => {
     const { containerWidth } = this.state
     const offset = pageNumber * containerWidth
-    const scrollNode = getSafelyScrollNode(this.scrollView);
+    const scrollNode = getSafelyScrollNode(this.scrollView)
     if (scrollNode) {
       scrollNode.scrollTo({ x: offset, y: 0, animated: true })
     }

@@ -1,11 +1,11 @@
 import React from 'react'
 import { Text, View, Image, StatusBar, Animated, ViewPropTypes } from 'react-native'
 import { arrayOf, bool, number, shape, string, func } from 'prop-types'
+import isUndefined from 'lodash/isUndefined'
 import StickyParallaxHeader from '../../index'
 import { constants, colors, sizes } from '../../constants'
 import styles from './TabbedHeader.styles'
 import RenderContent from './defaultProps/defaultProps'
-import isUndefined from 'lodash/isUndefined'
 
 const { event, ValueXY } = Animated
 export default class TabbedHeader extends React.Component {
@@ -50,12 +50,13 @@ export default class TabbedHeader extends React.Component {
 
   renderHeader = () => {
     const { header } = this.props
-    const renderHeader = header ? header : this.renderLogoHeader
+    const renderHeader = header || this.renderLogoHeader
+
     return renderHeader()
   }
 
   renderForeground = (scrollY) => {
-    const { title, titleStyle, foregroundImage } = this.props
+    const { title, subtitle, subtitleStyle = {}, titleStyle, foregroundImage } = this.props
     const messageStyle = titleStyle || styles.message
     const startSize = constants.responsiveWidth(18)
     const endSize = constants.responsiveWidth(10)
@@ -80,17 +81,12 @@ export default class TabbedHeader extends React.Component {
     })
 
     const renderImage = () => {
-      const logo = isUndefined(foregroundImage)
-        ? require('../../assets/images/photosPortraitMe.png')
-        : foregroundImage
+      const logo = isUndefined(foregroundImage) ? require('../../assets/images/photosPortraitMe.png') : foregroundImage
 
       if (foregroundImage !== null) {
         return (
-          <Animated.View style={{ opacity: imageOpacity }}>
-            <Animated.Image
-              source={logo}
-              style={[styles.profilePic, { width: imageSize, height: imageSize }]}
-            />
+          <Animated.View style={{ opacity: imageOpacity, justifyContent: 'center', alignItems: 'flex-end' }}>
+            <Animated.Image source={logo} style={[styles.profilePic, { width: imageSize, height: imageSize }]} />
           </Animated.View>
         )
       }
@@ -101,6 +97,7 @@ export default class TabbedHeader extends React.Component {
         {renderImage()}
         <Animated.View style={[styles.messageContainer, { opacity: titleOpacity }]}>
           <Text style={messageStyle}>{title}</Text>
+          <Text style={subtitleStyle}>{subtitle}</Text>
         </Animated.View>
       </View>
     )
@@ -128,8 +125,7 @@ export default class TabbedHeader extends React.Component {
         return marginBottom
       }
 
-      marginBottom =
-        constants.deviceHeight - padding * 2 - sizes.headerHeight - contentHeight[title]
+      marginBottom = constants.deviceHeight - padding * 2 - sizes.headerHeight - contentHeight[title]
 
       return marginBottom
     }
@@ -195,6 +191,7 @@ TabbedHeader.propTypes = {
   headerHeight: number,
   backgroundImage: Image.propTypes.source,
   title: string,
+  subtitle: string,
   bounces: bool,
   snapToEdge: bool,
   tabs: arrayOf(shape({})),
@@ -212,6 +209,7 @@ TabbedHeader.propTypes = {
   tabsContainerStyle: ViewPropTypes.style,
   foregroundImage: Image.propTypes.source,
   titleStyle: Text.propTypes.style,
+  subtitleStyle: Text.propTypes.style,
   header: func,
   onRef: func
 }
@@ -221,6 +219,7 @@ TabbedHeader.defaultProps = {
   headerHeight: sizes.headerHeight,
   backgroundImage: null,
   title: "Mornin' Mark! \nReady for a quiz?",
+  subtitle: '',
   bounces: true,
   snapToEdge: true,
   logo: require('../../assets/images/logo.png'),

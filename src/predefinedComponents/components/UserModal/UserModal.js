@@ -221,7 +221,7 @@ class UserModal extends React.Component {
     const { user } = this.props
 
     return (
-      <React.Fragment>
+      <>
         <StatusBar backgroundColor={user.color} barStyle="light-content" />
         <StickyParallaxHeader
           foreground={this.renderForeground()}
@@ -235,7 +235,7 @@ class UserModal extends React.Component {
         >
           {this.renderContent()}
         </StickyParallaxHeader>
-      </React.Fragment>
+      </>
     )
   }
 }

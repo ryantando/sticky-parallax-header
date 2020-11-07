@@ -17,7 +17,7 @@ const QuizCard = ({ data: { question, cards }, num, onPress, cardsAmount }) => {
       <View>
         <Text style={styles.mainText}>{question}</Text>
       </View>
-      {cards.map(card => (
+      {cards.map((card) => (
         <QuizOption
           key={card.question}
           reveal={() => {

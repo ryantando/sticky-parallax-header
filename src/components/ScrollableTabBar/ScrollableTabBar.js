@@ -39,7 +39,7 @@ class ScrollableTabBar extends React.PureComponent {
     const invisibleX = constants.deviceWidth + this.currentXPosition - constants.deviceWidth * 0.3 * (page + 1)
 
     if (invisibleX < 0) {
-      this.currentXPosition = this.currentXPosition - invisibleX
+      this.currentXPosition -= invisibleX
       this.scrollView.scrollTo({
         x: this.currentXPosition
       })
@@ -105,73 +105,84 @@ class ScrollableTabBar extends React.PureComponent {
     })
 
     return (
-      <View
-        style={[
-          styles.container,
-          {
-            backgroundColor: tabsContainerBackgroundColor
-          }
-        ]}
-      >
-        <ScrollView
-          style={styles.nestedStyle}
-          contentContainerStyle={[styles.contentContainer, tabsContainerStyle]}
-          ref={(r) => (this.scrollView = r)}
-          onScrollEndDrag={(event) => (this.currentXPosition = event.nativeEvent.contentOffset.x)}
-          vertical={false}
-          horizontal
-          bounces={false}
-          showsHorizontalScrollIndicator={false}
+      <>
+        <View style={{ backgroundColor: '#B2150B', width: '100%', height: 50, position: 'absolute', zIndex: 1 }} />
+        <View
+          style={[
+            styles.container,
+            {
+              backgroundColor: tabsContainerBackgroundColor,
+              backgroundColor: '#fff',
+              borderTopLeftRadius: 20,
+              borderTopRightRadius: 20,
+              height: 50,
+              zIndex: 1,
+              marginTop: 5
+            }
+          ]}
         >
-          {tabs.map((tab, page) => {
-            const isTabActive = activeTab === page
+          <ScrollView
+            style={styles.nestedStyle}
+            contentContainerStyle={[styles.contentContainer, tabsContainerStyle]}
+            ref={(r) => (this.scrollView = r)}
+            onScrollEndDrag={(event) => (this.currentXPosition = event.nativeEvent.contentOffset.x)}
+            vertical={false}
+            horizontal
+            bounces={false}
+            showsHorizontalScrollIndicator={false}
+          >
+            {tabs.map((tab, page) => {
+              const isTabActive = activeTab === page
 
-            return (
-              <TouchableOpacity
-                key={tab.title}
-                accessible
-                style={tabWrapperStyle}
-                accessibilityLabel={tab.title}
-                accessibilityTraits="button"
-                activeOpacity={0.9}
-                onPress={() => this.goToPage(page)}
-              >
-                <View style={[styles.tabContainer, tabTextContainerStyle, isTabActive && tabTextContainerActiveStyle]}>
-                  <Text
-                    // eslint-disable-next-line no-return-assign
-                    onLayout={({
-                      nativeEvent: {
-                        layout: { width }
-                      }
-                    }) => {
-                      const newWidth = [...tabUnderlineWidth]
-                      newWidth[page] = width
-                      this.setState({
-                        tabUnderlineWidth: newWidth
-                      })
-                    }}
-                    style={[styles.tabText, tabTextStyle, isTabActive && tabTextActiveStyle]}
+              return (
+                <TouchableOpacity
+                  key={tab.title}
+                  accessible
+                  style={tabWrapperStyle}
+                  accessibilityLabel={tab.title}
+                  accessibilityTraits="button"
+                  activeOpacity={0.9}
+                  onPress={() => this.goToPage(page)}
+                >
+                  <View
+                    style={[styles.tabContainer, tabTextContainerStyle, isTabActive && tabTextContainerActiveStyle]}
                   >
-                    {tab.title}
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            )
-          })}
-          <Animated.View
-            style={[
-              tabUnderlineStyle,
-              {
-                transform: [
-                  {
-                    translateX
-                  }
-                ]
-              }
-            ]}
-          />
-        </ScrollView>
-      </View>
+                    <Text
+                      // eslint-disable-next-line no-return-assign
+                      onLayout={({
+                        nativeEvent: {
+                          layout: { width }
+                        }
+                      }) => {
+                        const newWidth = [...tabUnderlineWidth]
+                        newWidth[page] = width
+                        this.setState({
+                          tabUnderlineWidth: newWidth
+                        })
+                      }}
+                      style={[styles.tabText, tabTextStyle, isTabActive && tabTextActiveStyle]}
+                    >
+                      {tab.title}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              )
+            })}
+            <Animated.View
+              style={[
+                tabUnderlineStyle,
+                {
+                  transform: [
+                    {
+                      translateX
+                    }
+                  ]
+                }
+              ]}
+            />
+          </ScrollView>
+        </View>
+      </>
     )
   }
 }

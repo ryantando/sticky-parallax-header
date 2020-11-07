@@ -57,7 +57,7 @@ const RenderContent = ({ user }) => {
       ]}
     >
       <Text style={styles.contentText}>{title}</Text>
-      {cards.map(card => (
+      {cards.map((card) => (
         <QuizListElement
           key={card.id}
           elements={card.elements}

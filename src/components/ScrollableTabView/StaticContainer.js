@@ -1,11 +1,8 @@
 import React from 'react'
-import {
-  bool,
-  node
-} from 'prop-types'
+import { bool, node } from 'prop-types'
 
 class StaticContainer extends React.Component {
-  shouldComponentUpdate = nextProps => !!nextProps.shouldUpdate
+  shouldComponentUpdate = (nextProps) => !!nextProps.shouldUpdate
 
   render() {
     const { children } = this.props

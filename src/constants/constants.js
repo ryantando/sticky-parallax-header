@@ -4,8 +4,8 @@ const { height, width } = Dimensions.get('window')
 
 const deviceWidth = width
 const deviceHeight = height
-const responsiveHeight = h => height * (h / 100)
-const responsiveWidth = w => width * (w / 100)
+const responsiveHeight = (h) => height * (h / 100)
+const responsiveWidth = (w) => width * (w / 100)
 const breakpoints = {
   smallPhoneWidth: 320,
   smallPhoneHeight: 600,

@@ -1,24 +1,6 @@
 import React, { Component } from 'react'
-import {
-  arrayOf,
-  bool,
-  func,
-  node,
-  number,
-  shape,
-  string,
-  oneOfType
-} from 'prop-types'
-import {
-  Dimensions,
-  ImageBackground,
-  ScrollView,
-  View,
-  Animated,
-  Easing,
-  ViewPropTypes,
-  Image
-} from 'react-native'
+import { arrayOf, bool, func, node, number, shape, string, oneOfType } from 'prop-types'
+import { Dimensions, ImageBackground, ScrollView, View, Animated, Easing, ViewPropTypes, Image } from 'react-native'
 import { ScrollableTabBar, ScrollableTabView } from './components'
 import { constants } from './constants'
 import styles from './styles'
@@ -203,7 +185,7 @@ class StickyParallaxHeader extends Component {
     return null
   }
 
-  isCloseToTop = ({contentOffset}) => {
+  isCloseToTop = ({ contentOffset }) => {
     const { onTopReached } = this.props
     if (contentOffset.y <= 0) {
       return onTopReached && onTopReached()
@@ -392,15 +374,11 @@ class StickyParallaxHeader extends Component {
               style={[
                 styles.overScrollPadding,
                 {
-                  backgroundColor: isArray
-                    ? arrayHeaderStyle.backgroundColor
-                    : headerStyle?.backgroundColor
+                  backgroundColor: isArray ? arrayHeaderStyle.backgroundColor : headerStyle?.backgroundColor
                 }
               ]}
             />
-            {backgroundImage
-              ? this.renderImageBackground(scrollHeight)
-              : this.renderPlainBackground(scrollHeight)}
+            {backgroundImage ? this.renderImageBackground(scrollHeight) : this.renderPlainBackground(scrollHeight)}
             {this.renderForeground(scrollHeight)}
           </View>
           {shouldRenderTabs && this.renderTabs()}

@@ -4,15 +4,7 @@ import { func, string, number } from 'prop-types'
 import styles from './QuizListElement.styles'
 import { colors } from '../../../constants'
 
-const QuizListElement = ({
-  onPress,
-  authorName,
-  imageSource,
-  mainText,
-  labelText,
-  elements,
-  pressUser
-}) => (
+const QuizListElement = ({ onPress, authorName, imageSource, mainText, labelText, elements, pressUser }) => (
   <TouchableOpacity onPress={onPress} style={styles.container} activeOpacity={0.95}>
     <View style={styles.labelContainer}>
       <View style={styles.labelTextContainer}>
