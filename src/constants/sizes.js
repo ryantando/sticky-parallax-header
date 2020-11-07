@@ -7,18 +7,9 @@ export default {
   headerHeight: ifIphoneX(92, constants.responsiveHeight(13)),
   cardScreenHeaderHeight: Platform.select({ ios: ifIphoneX(95, 85), android: 100 }),
   userModalHeaderHeight: ifIphoneX(100, 75),
-  homeScreenParallaxHeader: ifIphoneX(
-    constants.responsiveHeight(38),
-    constants.responsiveHeight(48)
-  ),
-  cardScreenParallaxHeader: ifIphoneX(
-    constants.responsiveHeight(43),
-    constants.responsiveHeight(53)
-  ),
-  userScreenParallaxHeader: ifIphoneX(
-    constants.responsiveHeight(43),
-    constants.responsiveHeight(53)
-  ),
+  homeScreenParallaxHeader: ifIphoneX(constants.responsiveHeight(25), constants.responsiveHeight(25)),
+  cardScreenParallaxHeader: ifIphoneX(constants.responsiveHeight(43), constants.responsiveHeight(53)),
+  userScreenParallaxHeader: ifIphoneX(constants.responsiveHeight(43), constants.responsiveHeight(53)),
   hitSlop: {
     top: 15,
     left: 15,

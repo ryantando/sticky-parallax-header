@@ -87,11 +87,8 @@ export default class TabbedHeader extends React.Component {
 
       if (foregroundImage !== null) {
         return (
-          <Animated.View style={{ opacity: imageOpacity }}>
-            <Animated.Image
-              source={logo}
-              style={[styles.profilePic, { width: imageSize, height: imageSize }]}
-            />
+          <Animated.View style={{ opacity: imageOpacity, justifyContent: 'center', alignItems: 'flex-end' }}>
+            <Animated.Image source={logo} style={[styles.profilePic, { width: imageSize, height: imageSize }]} />
           </Animated.View>
         );
       }
@@ -104,6 +101,7 @@ export default class TabbedHeader extends React.Component {
         {renderImage()}
         <Animated.View style={[styles.messageContainer, { opacity: titleOpacity }]}>
           <Text style={messageStyle}>{title}</Text>
+          <Text style={subtitleStyle}>{subtitle}</Text>
         </Animated.View>
       </View>
     );
@@ -197,6 +195,7 @@ TabbedHeader.propTypes = {
   headerHeight: number,
   backgroundImage: Image.propTypes.source,
   title: string,
+  subtitle: string,
   bounces: bool,
   snapToEdge: bool,
   tabs: arrayOf(shape({})),
@@ -214,6 +213,7 @@ TabbedHeader.propTypes = {
   tabsContainerStyle: ViewPropTypes.style,
   foregroundImage: Image.propTypes.source,
   titleStyle: Text.propTypes.style,
+  subtitleStyle: Text.propTypes.style,
   header: func,
   onRef: func,
 };
@@ -223,6 +223,7 @@ TabbedHeader.defaultProps = {
   headerHeight: sizes.headerHeight,
   backgroundImage: null,
   title: "Mornin' Mark! \nReady for a quiz?",
+  subtitle: '',
   bounces: true,
   snapToEdge: true,
   logo: require('../../assets/images/logo.png'),

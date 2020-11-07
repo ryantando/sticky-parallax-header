@@ -70,7 +70,7 @@ export default StyleSheet.create({
     alignItems: 'flex-end',
   },
   leftHeaderButton: {
-    flex: 1,
+    flex: 1
   },
   foregroundTitle: {
     flexGrow: 1,

@@ -74,6 +74,8 @@ export type TabbedHeaderProps = SharedProps &
     scrollEvent?: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
     title?: string;
     titleStyle?: TextStyle;
+    subtitle?: string;
+    subtitleStyle?: TextStyle;
   };
 
 export type DetailsHeaderProps = SharedProps &

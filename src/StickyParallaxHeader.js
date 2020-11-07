@@ -205,7 +205,7 @@ class StickyParallaxHeader extends Component {
   };
 
   isCloseToTop = ({ contentOffset }) => {
-    const { onTopReached } = this.props;
+    const { onTopReached } = this.props
     if (contentOffset.y <= 0) {
       return onTopReached && onTopReached();
     }
@@ -399,15 +399,11 @@ class StickyParallaxHeader extends Component {
               style={[
                 styles.overScrollPadding,
                 {
-                  backgroundColor: isArray
-                    ? arrayHeaderStyle.backgroundColor
-                    : headerStyle?.backgroundColor,
-                },
+                  backgroundColor: isArray ? arrayHeaderStyle.backgroundColor : headerStyle?.backgroundColor
+                }
               ]}
             />
-            {backgroundImage
-              ? this.renderImageBackground(scrollHeight)
-              : this.renderPlainBackground(scrollHeight)}
+            {backgroundImage ? this.renderImageBackground(scrollHeight) : this.renderPlainBackground(scrollHeight)}
             {this.renderForeground(scrollHeight)}
           </View>
           {shouldRenderTabs && this.renderTabs()}
