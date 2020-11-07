@@ -1,7 +1,7 @@
-import React from 'react'
-import { View } from 'react-native'
-import { QuizCard } from '../../components'
-import styles from '../DetailsHeader.styles'
+import React from 'react';
+import { View } from 'react-native';
+import { QuizCard } from '../../components';
+import styles from '../DetailsHeader.styles';
 
 const renderContent = (user) => (
   <View style={styles.content}>
@@ -9,6 +9,6 @@ const renderContent = (user) => (
       <QuizCard data={data} num={i} key={data.question} cardsAmount={arr.length} />
     ))}
   </View>
-)
+);
 
-export { renderContent }
+export { renderContent };
